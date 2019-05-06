@@ -3,6 +3,7 @@ import { debounce } from "debounce";
 import Search from './Search';
 import Results from './Results';
 import Footer from './Footer';
+import PrivacyPolicy from './PrivacyPolicy';
 import astronaut from '../resources/astronaut.svg'
 import 'antd/dist/antd.css';  // or 'antd/dist/antd.less'
 import '../styles/App.css';
@@ -141,7 +142,9 @@ class App extends Component {
   }
 
   render() {
-    let landingPage = (
+    const { match: { params: { page } } } = this.props;
+
+    const landingPage = (
       <div className='landing'>
         <img alt='astronaut' className='astronaut' src={astronaut} />
         <div className='intro'>
@@ -157,6 +160,7 @@ class App extends Component {
               values={{ appName: 'Instant Username Search' }} />
           </p>
         </div>
+        {/* <PrivacyPolicy /> */}
       </div>
     );
 
@@ -171,7 +175,20 @@ class App extends Component {
       }
     } else {
       // empty search
-      content = landingPage;
+      switch (page) {
+        case "privacy":
+          content = <PrivacyPolicy />
+          break;
+        case "terms":
+          //terms and conditions
+          break;
+        case "contact":
+          // contact info
+          break;
+        default:
+          content = landingPage;
+          break;
+      }
     }
 
     return (
@@ -188,7 +205,7 @@ class App extends Component {
           <div id="footer">
             <hr />
             <div className="container">
-              <Footer />
+              <Footer page={page} />
             </div>
           </div>
         </div>

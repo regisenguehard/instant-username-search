@@ -5,6 +5,11 @@ import '../styles/Footer.css';
 
 class Footer extends Component {
   render() {
+    let { page } = this.props;
+    if (typeof page === "undefined") {
+      page = ""
+    }
+
     return (
       <footer className='footer'>
         <div className='pull-left'>
@@ -19,11 +24,11 @@ class Footer extends Component {
         </div>
         <div className='languages pull-right'>
           <ul>
-            <li><Link to="/ca">Català</Link></li>
-            <li><Link to="/de">Deutsch</Link></li>
-            <li><Link to="/en">English</Link></li>
-            <li><Link to="/es">Español</Link></li>
-            <li><Link to="/tr">Türkçe</Link></li>
+            <li><Link to={"/ca/" + page}>Català</Link></li>
+            <li><Link to={"/de/" + page}>Deutsch</Link></li>
+            <li><Link to={"/en/" + page}>English</Link></li>
+            <li><Link to={"/es/" + page}>Español</Link></li>
+            <li><Link to={"/tr/" + page}>Türkçe</Link></li>
           </ul>
         </div>
         <div className='coffee'>
